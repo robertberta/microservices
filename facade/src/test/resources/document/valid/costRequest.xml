@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:workflowRequest xmlns:ns6="http://www.visma.com/approvalod/processing-instructions" xmlns:ns5="http://www.visma.com/approvalod/property-types" xmlns:ns8="http://www.visma.com/approvalod/time-limit" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:ns7="http://www.visma.com/approvalod/workflowdefinition" xmlns:ns9="http://www.visma.com/approvalod/rules" xmlns:ns12="http://www.visma.com/approvalod/attachment" xmlns:ns11="http://www.visma.com/approvalod/attachment-store" xmlns:ns2="http://www.visma.com/approvalod/supplier" xmlns:ns4="http://www.visma.com/approvalod/simpletypes" xmlns:ns3="http://www.visma.com/approvalod/documentlines">
+    <ns3:sentTime>2017-01-26T15:04:32.890+02:00</ns3:sentTime>
+    <ns3:submitter>2362</ns3:submitter>
+    <ns3:processing xsi:type="ns6:RuleEngineProcessingInstruction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <ns6:clientApplicationType>
+            <ns6:applicationTypeName>Visma.net Cost Request</ns6:applicationTypeName>
+            <ns6:applicationMajorVersion>1</ns6:applicationMajorVersion>
+            <ns6:applicationMinorVersion>0</ns6:applicationMinorVersion>
+        </ns6:clientApplicationType>
+        <ns6:taskEventSubscription>
+            <ns6:enable>true</ns6:enable>
+        </ns6:taskEventSubscription>
+    </ns3:processing>
+    <ns3:workflowDocument xsi:type="ns3:costRequestWorkflowDocument" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <ns3:companyId>200990066</ns3:companyId>
+        <ns3:documentId>
+            <ns4:systemId>5afd6dce-720b-41e0-a94f-8f6918bd56ef</ns4:systemId>
+            <ns4:displayId>5afd6dce-720b-41e0-a94f-8f6918bd56ef</ns4:displayId>
+        </ns3:documentId>
+        <ns3:documentVersion>1</ns3:documentVersion>
+        <ns3:factProperties>
+            <ns9:item xsi:type="ns9:requesterAttribute">
+                <ns9:requester>50753</ns9:requester>
+            </ns9:item>
+            <ns9:item xsi:type="ns9:costUnitAttribute">
+                <ns9:dimension>1</ns9:dimension>
+                <ns9:number>DS</ns9:number>
+            </ns9:item>
+            <ns9:item xsi:type="ns9:costUnitAttribute">
+                <ns9:dimension>2</ns9:dimension>
+                <ns9:number>PAS</ns9:number>
+            </ns9:item>
+        </ns3:factProperties>
+        <ns3:description>Test CostRequest 5afd6dce-720b-41e0-a94f-8f6918bd56ef</ns3:description>
+        <ns3:costRequestDate>2017-01-26T15:04:32.888+02:00</ns3:costRequestDate>
+        <ns3:amount>
+            <ns4:isoCode>EUR</ns4:isoCode>
+            <ns4:amount>13.0</ns4:amount>
+        </ns3:amount>
+        <ns3:foreignAmount>
+            <ns4:isoCode>RON</ns4:isoCode>
+            <ns4:amount>58.5</ns4:amount>
+        </ns3:foreignAmount>
+        <ns3:supplier xsi:type="ns3:Supplier">
+            <ns2:number>13</ns2:number>
+            <ns2:name>Supplier</ns2:name>
+        </ns3:supplier>
+        <ns3:employeeCode>E1234</ns3:employeeCode>
+    </ns3:workflowDocument>
+    <ns3:Attachments>
+        <ns3:attachments>
+            <attachment xsi:type="ns12:EmbeddedAttachment" contentType="image/png" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <checksum xsi:nil="true"/>
+            </attachment>
+        </ns3:attachments>
+    </ns3:Attachments>
+</ns3:workflowRequest>

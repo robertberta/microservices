@@ -1,0 +1,7 @@
+.idea
+**/*.iml
+target/
+logs/
+docker/*.war
+docker/*.ear
+docker-compose.override.yml
