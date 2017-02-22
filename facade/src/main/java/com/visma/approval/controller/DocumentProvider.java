@@ -2,6 +2,8 @@ package com.visma.approval.controller;
 
 import com.visma.approval.controller.exceptions.ParserException;
 import com.visma.approval.model.Document;
+import com.visma.approval.model.dto.FieldDescriptor;
+import com.visma.approval.model.dto.Processing;
 import com.visma.approval.model.dto.ProcessingProvider;
 import com.visma.approval.view.FieldDescriptorStore;
 import org.json.JSONObject;
@@ -9,10 +11,7 @@ import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import static com.visma.approval.view.ClassHandler.getObjectFromJson;
 
@@ -46,6 +45,8 @@ public class DocumentProvider {
 
         result.fields = workflowDocumentfields;
 
+        checkMandatory(result);
+
         return result;
     }
 
@@ -70,6 +71,16 @@ public class DocumentProvider {
             }
         }
         return result;
+    }
+
+    private void checkMandatory(Document document) throws ParserException{
+        Processing processing = document.processing;
+        List<FieldDescriptor> mandatoryFields = store.getMandatoryFields(processing.applicationName);
+        for (FieldDescriptor mandatoryField:mandatoryFields){
+            if (document.get(mandatoryField.name) == null){
+                throw new ParserException("Mandatory field " +  mandatoryField.name + "is missing");
+            }
+        }
     }
 
     private String stripNs(String xml) {
