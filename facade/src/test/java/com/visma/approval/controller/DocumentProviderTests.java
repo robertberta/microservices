@@ -57,7 +57,7 @@ public class DocumentProviderTests {
         for (String xml : xmls) {
             Document document = documentProvider.parseXml(xml);
 
-            Collection<String> fieldNames = document.getFields().keySet();
+            Collection<String> fieldNames = document.fields.keySet();
 
             final String applicationName = document.processing.applicationName;
             final Map<String, String> fieldDescriptors = store.getAllFields(applicationName);
@@ -68,7 +68,6 @@ public class DocumentProviderTests {
                 document.get(fieldName);
             }
         }
-
     }
 
     @Test

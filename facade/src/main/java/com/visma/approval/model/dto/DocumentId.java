@@ -7,11 +7,6 @@ public class DocumentId {
     public String systemId;
     public String displayId;
 
-    public DocumentId(String isoCode, float amount) {
-        this.systemId = systemId;
-        this.displayId = displayId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

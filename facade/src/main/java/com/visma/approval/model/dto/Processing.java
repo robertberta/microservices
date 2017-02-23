@@ -29,4 +29,12 @@ public class Processing {
         result = 31 * result + (eventSubscription != null ? eventSubscription.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Processing{" +
+                "applicationName='" + applicationName + '\'' +
+                ", eventSubscription=" + eventSubscription +
+                '}';
+    }
 }

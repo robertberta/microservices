@@ -23,11 +23,8 @@ public class Document {
     @Lob
     public HashMap<String, String> fields = new HashMap<>();
 
-    private static Gson gson = new Gson();
-
-    public Map<String, String> getFields() {return fields;}
-
     public String get(String fieldName) {
+
         return fields.get(fieldName);
     }
 
@@ -64,5 +61,15 @@ public class Document {
         result = 31 * result + (processing != null ? processing.hashCode() : 0);
         result = 31 * result + (fields != null ? fields.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "id=" + id +
+                ", sentTime=" + sentTime +
+                ", processing=" + processing +
+                ", fields=" + fields +
+                '}';
     }
 }

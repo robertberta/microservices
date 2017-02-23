@@ -12,14 +12,14 @@ public class Controller {
     @Autowired
     DocumentProvider documentProvider;
 
-    @RequestMapping(value = "/document", method = RequestMethod.PUT, produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> greeting(@RequestBody String bodyContent) {
+    @RequestMapping(value = "/document", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> addDocument(@RequestBody String bodyContent) {
         ResponseEntity<String> result;
         try {
             Document document = documentProvider.parseXml(bodyContent);
-            result = new ResponseEntity<String>(document.toString(), HttpStatus.OK);
+            result = new ResponseEntity<>(document.toString(), HttpStatus.OK);
         } catch (Exception ex) {
-            result = new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+            result = new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
         return result;
