@@ -1,10 +1,10 @@
 package com.visma.approval.view;
 
-import com.visma.approval.controller.exceptions.ParserException;
-import com.visma.approval.model.dto.FieldDescriptor;
+import com.visma.approval.facade.dto.FieldDescriptor;
 import org.springframework.stereotype.Component;
 import org.apache.commons.collections.ListUtils;
 
+import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -43,12 +43,12 @@ public class FieldDescriptorStore {
 
     }
 
-    public List<FieldDescriptor> getMandatoryFields(String workflowDocumentName) throws ParserException {
+    public List<FieldDescriptor> getMandatoryFields(String workflowDocumentName) throws ParseException {
         check(workflowDocumentName);
         return mapMandatory.get(workflowDocumentName);
     }
 
-    public List<FieldDescriptor> getOptionalFields(String workflowDocumentName) throws ParserException {
+    public List<FieldDescriptor> getOptionalFields(String workflowDocumentName) throws ParseException {
         check(workflowDocumentName);
         return mapOptional.get(workflowDocumentName);
     }
@@ -57,7 +57,7 @@ public class FieldDescriptorStore {
         return mapMandatory.keySet();
     }
 
-    public Map<String, String> getAllFields(String workflowDocumentName) throws ParserException {
+    public Map<String, String> getAllFields(String workflowDocumentName) throws ParseException {
         check(workflowDocumentName);
         return mapAllFields.get(workflowDocumentName);
     }
@@ -86,14 +86,14 @@ public class FieldDescriptorStore {
 
     }
 
-    private void check(String workflowDocumentName) throws ParserException {
+    private void check(String workflowDocumentName) throws ParseException {
         if (workflowDocumentName == null) {
-            throw new ParserException("WorkflowDocument not defined");
+            throw new ParseException("WorkflowDocument not defined",0);
         }
         if (!mapOptional.containsKey(workflowDocumentName) ||
             !mapMandatory.containsKey(workflowDocumentName) ||
             !mapAllFields.containsKey(workflowDocumentName)) {
-            throw new ParserException("Fields not defined for " + workflowDocumentName);
+            throw new ParseException("Fields not defined for " + workflowDocumentName,0);
         }
     }
 

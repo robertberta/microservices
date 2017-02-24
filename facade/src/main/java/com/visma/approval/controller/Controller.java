@@ -1,6 +1,7 @@
 package com.visma.approval.controller;
 
-import com.visma.approval.model.Document;
+import com.visma.approval.facade.Document;
+import com.visma.approval.model.DocumentProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

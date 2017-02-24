@@ -1,35 +1,31 @@
-package com.visma.approval.model.dto;
+package com.visma.approval.model;
 
-import com.visma.approval.controller.exceptions.ParserException;
-import com.visma.approval.model.dto.Processing;
-import org.springframework.expression.ParseException;
+import com.visma.approval.facade.dto.Processing;
 
-import javax.persistence.*;
-import java.beans.Transient;
+import java.text.ParseException;
 
 /**
  * Created by robert on 06.02.2017.
  */
 public class ProcessingProvider {
-    public Integer id;
 
-    public class ClientApplicationType {
+    private class ClientApplicationType {
         String applicationTypeName;
         Integer applicationMajorVersion;
         Integer applicationMinorVersion;
     }
 
-    public class TaskEventSubscription {
+    private class TaskEventSubscription {
         Boolean enable;
     }
 
     private ClientApplicationType clientApplicationType;
     private TaskEventSubscription taskEventSubscription;
 
-    public String getApplicationFullName() throws ParserException{
+    public String getApplicationFullName() throws ParseException {
 
         if (clientApplicationType == null) {
-            throw new ParserException("Processing mandatory fields missing");
+            throw new ParseException("Processing mandatory fields missing",0);
         }
 
         String name = clientApplicationType.applicationTypeName;
@@ -45,10 +41,7 @@ public class ProcessingProvider {
         return taskEventSubscription.enable;
     }
 
-    public Processing get() throws ParserException {
-        Processing processing = new Processing();
-        processing.eventSubscription = getTaskEventSubscription();
-        processing.applicationName = getApplicationFullName();
-        return processing;
+    public Processing get() throws ParseException {
+        return new Processing(getApplicationFullName(),getTaskEventSubscription());
     }
 }

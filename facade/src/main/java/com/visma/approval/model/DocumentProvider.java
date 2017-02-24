@@ -1,19 +1,18 @@
-package com.visma.approval.controller;
+package com.visma.approval.model;
 
-import com.visma.approval.controller.exceptions.ParserException;
-import com.visma.approval.model.Document;
-import com.visma.approval.model.dto.FieldDescriptor;
-import com.visma.approval.model.dto.Processing;
-import com.visma.approval.model.dto.ProcessingProvider;
+import com.visma.approval.facade.Document;
+import com.visma.approval.facade.dto.FieldDescriptor;
+import com.visma.approval.facade.dto.Processing;
 import com.visma.approval.view.FieldDescriptorStore;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
 import java.util.*;
 
-import static com.visma.approval.view.ClassHandler.getObjectFromJson;
+import static com.visma.approval.facade.ClassHandler.getObjectFromJson;
 
 /**
  * Created by robert on 06.02.2017.
@@ -23,34 +22,32 @@ public class DocumentProvider {
     @Autowired
     private FieldDescriptorStore store;
 
-    public Document parseXml(String xml) throws ParserException {
-        Document result = new Document();
+    public Document parseXml(String xml) throws ParseException {
 
         xml = stripNs(xml);
         JSONObject jsonObject = XML.toJSONObject(xml);
         jsonObject = jsonObject.getJSONObject("workflowRequest");
 
-        ProcessingProvider processing = getObjectFromJson(jsonObject.getJSONObject("processing").toString(), ProcessingProvider.class);
-        result.processing = processing.get();
+        ProcessingProvider processingProvider = getObjectFromJson(jsonObject.getJSONObject("processing").toString(), ProcessingProvider.class);
+        Processing processing = processingProvider.get();
 
-        Map<String, String> fieldDescriptors = store.getAllFields(processing.getApplicationFullName());
+        Map<String, String> fieldDescriptors = store.getAllFields(processing.getApplicationName());
 
         Map<String, String> workflowRequestFields = jsonToMap(jsonObject, fieldDescriptors);
 
         Date sentTime = getObjectFromJson(workflowRequestFields.get("sentTime"),Date.class);
-        result.sentTime = sentTime;
 
         jsonObject = jsonObject.getJSONObject("workflowDocument");
         HashMap<String, String> workflowDocumentfields = jsonToMap(jsonObject, fieldDescriptors);
 
-        result.fields = workflowDocumentfields;
 
-        checkMandatory(result);
+        Document document = new Document(null,sentTime,processingProvider.get(),workflowDocumentfields);
+        checkMandatory(document);
 
-        return result;
+        return document;
     }
 
-    private HashMap<String, String> jsonToMap(JSONObject jsonObject, Map<String, String> mapFieldType) throws ParserException {
+    private HashMap<String, String> jsonToMap(JSONObject jsonObject, Map<String, String> mapFieldType) throws ParseException {
         HashMap<String, String> result = new HashMap<String, String>();
 
         Iterator<?> itFieldName = jsonObject.keys();
@@ -65,7 +62,7 @@ public class DocumentProvider {
                     getObjectFromJson(json, fieldType);
                 }
                 catch (ClassNotFoundException e) {
-                    throw new ParserException("Type " + fieldType + " is not defined");
+                    throw new ParseException("Type " + fieldType + " is not defined",0);
                 }
                 result.put(fieldName, json);
             }
@@ -73,12 +70,12 @@ public class DocumentProvider {
         return result;
     }
 
-    private void checkMandatory(Document document) throws ParserException{
-        Processing processing = document.processing;
-        List<FieldDescriptor> mandatoryFields = store.getMandatoryFields(processing.applicationName);
+    private void checkMandatory(Document document) throws ParseException{
+        Processing processing = document.getProcessing();
+        List<FieldDescriptor> mandatoryFields = store.getMandatoryFields(processing.getApplicationName());
         for (FieldDescriptor mandatoryField:mandatoryFields){
             if (document.get(mandatoryField.name) == null){
-                throw new ParserException("Mandatory field " +  mandatoryField.name + "is missing");
+                throw new ParseException("Mandatory field " +  mandatoryField.name + "is missing",0);
             }
         }
     }

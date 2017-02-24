@@ -1,10 +1,9 @@
 package com.visma.approval;
 
-import com.visma.approval.controller.exceptions.ParserException;
-import com.visma.approval.model.dto.FieldDescriptor;
 import com.visma.approval.view.FieldDescriptorStore;
 import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
+import java.text.ParseException;
 import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -16,7 +15,7 @@ public class FieldDescriptorStoreTests {
     FieldDescriptorStore store = new FieldDescriptorStore();
 
     @Test
-    public void testMandatoryAndOptionalOverlap() throws ParserException {
+    public void testMandatoryAndOptionalOverlap() throws ParseException {
         assertTrue(store.getWorkflowDocumentNames().size()>0);
         for (String name:store.getWorkflowDocumentNames()){
             Collection overlapping = CollectionUtils.intersection(store.getMandatoryFields(name), store.getOptionalFields(name));

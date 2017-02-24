@@ -1,9 +1,8 @@
 package com.visma.approval.model;
 
 import com.visma.approval.TestUtils;
-import com.visma.approval.controller.DocumentProvider;
-import com.visma.approval.controller.exceptions.ParserException;
-import com.visma.approval.model.dto.ProcessingProvider;
+import com.visma.approval.facade.Document;
+import com.visma.approval.facade.DocumentRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Created by robert on 13.02.2017.
@@ -25,15 +25,13 @@ public class DocumentRepositoryTests {
     DocumentRepository repository;
 
     @Test
-    public void saveDocument() throws IOException,ParserException{
+    public void saveDocument() throws IOException,ParseException {
         String xml = TestUtils.resourceFileContent("document/valid/costRequest.xml");
         Document document = documentProvider.parseXml(xml);
         repository.save(document);
         Document readDocument = repository.findAll().iterator().next();
-        if (Math.abs(readDocument.sentTime.getTime()-document.sentTime.getTime())<1000){
-            readDocument.sentTime = document.sentTime;
-        }
-        Assert.assertEquals(document,readDocument);
-        ProcessingProvider processing = new ProcessingProvider();
+        Assert.assertEquals(document.getFields(),readDocument.getFields());
+        Assert.assertEquals(document.getProcessing(),readDocument.getProcessing());
+
     }
 }

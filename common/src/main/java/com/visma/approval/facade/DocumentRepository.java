@@ -1,4 +1,4 @@
-package com.visma.approval.model;
+package com.visma.approval.facade;
 
 import org.springframework.data.repository.CrudRepository;
 

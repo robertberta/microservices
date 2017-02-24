@@ -1,4 +1,4 @@
-package com.visma.approval.model.dto;
+package com.visma.approval.facade.dto;
 
 /**
  * Created by robert on 10.02.2017.
