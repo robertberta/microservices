@@ -47,7 +47,7 @@ public class DocumentProviderTests {
         Assert.assertEquals(new Amount(58.5, "RON"), document.get("foreignAmount", Amount.class));
 
         Date expectedSentTime = ClassHandler.getObjectFromJson("2017-01-26T15:04:32.888+02:00", Date.class);
-        Assert.assertEquals(expectedSentTime.toString(), document.getSentTime().toString());
+        Assert.assertTrue(expectedSentTime.getTime() -  document.getSentTime()<1000);
     }
 
     @Test
