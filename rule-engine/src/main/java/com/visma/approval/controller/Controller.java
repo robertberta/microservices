@@ -2,7 +2,7 @@ package com.visma.approval.controller;
 
 import com.google.gson.Gson;
 import com.visma.approval.facade.Document;
-import com.visma.approval.model.ProcessProvider;
+import com.visma.approval.model.ProcessHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,8 @@ public class Controller {
         ResponseEntity<String> result;
         try {
             Document document = gson.fromJson(bodyContent,Document.class);
-            ProcessProvider processProvider = new ProcessProvider(document);
-            Process process = processProvider.getProcess();
+            ProcessHandler processHandler = new ProcessHandler(document);
+            Process process = processHandler.getProcess();
             result = new ResponseEntity<String>(process.toString(), HttpStatus.OK);
         } catch (Exception ex) {
             result = new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);

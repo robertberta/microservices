@@ -41,7 +41,7 @@ public class DocumentProvider {
         HashMap<String, String> workflowDocumentfields = jsonToMap(jsonObject, fieldDescriptors);
 
 
-        Document document = new Document(null,sentTime,processingProvider.get(),workflowDocumentfields);
+        Document document = new Document(null,sentTime.getTime(),processingProvider.get(),workflowDocumentfields);
         checkMandatory(document);
 
         return document;

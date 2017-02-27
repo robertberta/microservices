@@ -20,8 +20,8 @@ public class Document {
     private static final Logger log = Logger.getLogger(Document.class.getName());
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private Date sentTime;
+    private Long id;
+    private Long sentTime;
     private Processing processing;
     @Lob
     private HashMap<String, String> fields;

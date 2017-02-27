@@ -1,16 +1,11 @@
 package com.visma.approval.ruleengine;
 
-import com.visma.approval.facade.Document;
 import com.visma.approval.ruleengine.dto.ProcessState;
-import com.visma.approval.ruleengine.dto.Step;
-import com.visma.approval.ruleengine.dto.UserAction;
-import lombok.Builder;
+import com.visma.approval.ruleengine.dto.ProcessStep;
+import com.visma.approval.ruleengine.dto.ApproverAction;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -20,11 +15,13 @@ import java.util.List;
 @Data
 public class Process {
     @Id
-    private Integer documentId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long processId;
+    private Long documentId;
     @Lob
-    private List<Step> steps;
+    private List<ProcessStep> processSteps;
     @Lob
-    private List<UserAction> userActions;
+    private List<ApproverAction> approverActions;
     private Integer currentStep;
     private ProcessState state;
 }
