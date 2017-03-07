@@ -18,8 +18,10 @@ public class Controller {
         ResponseEntity<String> result;
         try {
             Document document = gson.fromJson(bodyContent,Document.class);
-            ProcessHandler processHandler = new ProcessHandler(document);
-            Process process = processHandler.getProcess();
+
+            ProcessHandler processHandler = new ProcessHandler();
+            Process process = processHandler.newProcess(document);
+
             result = new ResponseEntity<String>(process.toString(), HttpStatus.OK);
         } catch (Exception ex) {
             result = new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
