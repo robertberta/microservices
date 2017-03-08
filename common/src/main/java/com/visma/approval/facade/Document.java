@@ -1,23 +1,25 @@
 package com.visma.approval.facade;
 
+import com.google.gson.Gson;
 import com.visma.approval.facade.dto.Processing;
 import lombok.*;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
  * Created by robert on 06.02.2017.
  */
-@Entity
+@Entity(name="document")
 @Value
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
+@Log4j
 public class Document {
-    private static final Logger log = Logger.getLogger(Document.class.getName());
+    private static Gson gson = new Gson();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,8 +29,16 @@ public class Document {
     private HashMap<String, String> fields;
 
     public String get(String fieldName) {
-
+        if (!fields.containsKey(fieldName)){
+            throw new RuntimeException("Field " + fieldName + " missing");
+        }
         return fields.get(fieldName);
+    }
+
+    public String getSubfield(String fieldName,String subfieldName){
+        String json = get(fieldName);
+        JSONObject jsonObject = new JSONObject(json);
+        return jsonObject.get(subfieldName).toString();
     }
 
     public <T> T get(String fieldName, Class T) {

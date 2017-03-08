@@ -9,8 +9,13 @@
       "stage": 1,
       "step": 2,
       "queryName": "amount below"
+    },
+    {
+      "stage": 2,
+      "step": 1,
+      "userId": 1003
     }
   ],
   "applicationName": "Visma.net Cost Request 1.0",
-  "active": true
+  "active": false
 }

@@ -69,13 +69,13 @@
 
     <!--<repositories>-->
     <!--<repository>-->
-    <!--<id>spring-releases</id>-->
+    <!--<bookId>spring-releases</bookId>-->
     <!--<url>https://repo.spring.io/libs-release</url>-->
     <!--</repository>-->
     <!--</repositories>-->
     <!--<pluginRepositories>-->
     <!--<pluginRepository>-->
-    <!--<id>spring-releases</id>-->
+    <!--<bookId>spring-releases</bookId>-->
     <!--<url>https://repo.spring.io/libs-release</url>-->
     <!--</pluginRepository>-->
     <!--</pluginRepositories>-->

@@ -43,6 +43,18 @@
             <version>2.2.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160807</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
@@ -61,13 +73,13 @@
 
     <!--<repositories>-->
         <!--<repository>-->
-            <!--<id>spring-releases</id>-->
+            <!--<bookId>spring-releases</bookId>-->
             <!--<url>https://repo.spring.io/libs-release</url>-->
         <!--</repository>-->
     <!--</repositories>-->
     <!--<pluginRepositories>-->
         <!--<pluginRepository>-->
-            <!--<id>spring-releases</id>-->
+            <!--<bookId>spring-releases</bookId>-->
             <!--<url>https://repo.spring.io/libs-release</url>-->
         <!--</pluginRepository>-->
     <!--</pluginRepositories>-->

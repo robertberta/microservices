@@ -1,15 +1,21 @@
 package com.visma.approval.ruleengine;
 
-import com.visma.approval.ruleengine.dto.TaskPK;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Value;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by robert on 27.02.2017.
  */
+@Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor(force=true)
 public class Task {
-    @EmbeddedId
-    private TaskPK pk;
+    @Id
+    private Long processStepId;
     private Long dueDate;
 }

@@ -24,8 +24,8 @@ public class ClassHandler {
         if (name.equals("Date")){
             return Class.forName("java.util.Date");
         }
-        if (name.equals("ProcessingProvider")){
-            return Class.forName("com.visma.approval.model.ProcessingProvider");
+        if (name.equals("ProcessingAdapter")){
+            return Class.forName("com.visma.approval.facade.model.ProcessingAdapter");
         }
         return Class.forName("com.visma.approval.facade.dto." + name);
     }
