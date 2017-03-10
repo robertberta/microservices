@@ -3,6 +3,8 @@ imageName := $(shell docker images -q $(containerName))
 all: start
 build: rmi
 	docker build -t $(containerName) .
+	run
+run: 
 	docker run -d -p 3306:3306 --name $(containerName) $(containerName)
 start: stop
 	docker start "$(containerName)"
@@ -14,3 +16,4 @@ getcontainername:
 	containerName:=$(docker images -q $(containerName))
 rmi: rm
 	docker rmi -f $(containerName) || true;
+dbclean: rm run
