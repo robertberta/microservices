@@ -11,5 +11,6 @@
       "queryName": "amount below"
     }
   ],
-  "applicationName": "Visma.net Cost Request 1.0"
+  "applicationName": "Visma.net Cost Request 1.0",
+  "active": true
 }

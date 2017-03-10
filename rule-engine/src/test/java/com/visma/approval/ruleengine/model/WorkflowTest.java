@@ -34,17 +34,4 @@ public class WorkflowTest {
         String result = gson.toJson(workflow);
         System.out.println(result);
     }
-
-    @Test
-    public void saveWorkflowFromJson() throws IOException{
-        List<String> jsons = TestUtils.resourceFolderFileContents("workflow/valid");
-
-        for (String json : jsons) {
-
-            Workflow workflow = gson.fromJson(json,Workflow.class);
-            workflow.prepareForSave();
-            workflowRepository.save(workflow);
-        }
-    }
-
 }

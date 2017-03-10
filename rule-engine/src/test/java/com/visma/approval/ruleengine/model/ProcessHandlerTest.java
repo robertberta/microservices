@@ -1,6 +1,10 @@
 package com.visma.approval.ruleengine.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.visma.approval.ruleengine.ProcessRepository;
+import com.visma.approval.ruleengine.Workflow;
+import com.visma.approval.ruleengine.WorkflowRepository;
 import com.visma.approval.ruleengine.controller.exceptions.ProcessException;
 import com.visma.approval.facade.Document;
 import com.visma.approval.facade.DocumentRepository;
@@ -34,6 +38,8 @@ public class ProcessHandlerTest {
     DocumentRepository documentRepository;
     @Autowired
     ProcessRepository processRepository;
+    @Autowired
+    WorkflowRepository workflowRepository;
     @Autowired
     WorkflowHandler workflowHandler;
 
@@ -72,13 +78,13 @@ public class ProcessHandlerTest {
 
     @Test
     public void testReject2Stages() throws ProcessException,WorkflowException{
-        workflowHandler.activateWorkflow(2L);
+
+        Workflow workflow = workflowRepository.findOneByApplicationName("Visma.net Expense 1.0");
+        workflowHandler.activateWorkflow(workflow.getId());
 
         Process process = addApproverAction(newProcess(), 1, Action.REJECT);
 
         Assert.assertEquals(process.getStatus(), ProcessStatus.REJECTED);
-
-        workflowHandler.activateWorkflow(1L);
     }
 
     private Process addApproverAction(Process process, Integer stepNo, Action action) throws ProcessException{

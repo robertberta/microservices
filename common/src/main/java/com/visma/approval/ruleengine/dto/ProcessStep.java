@@ -1,5 +1,6 @@
 package com.visma.approval.ruleengine.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.visma.approval.ruleengine.Process;
 import lombok.*;
 
@@ -16,6 +17,7 @@ public class ProcessStep {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id = null;
+  @JsonIgnore
   @Setter
   @ManyToOne
   private Process process;

@@ -1,1 +1,2 @@
 initialize WorkflowStepQueryStore from conf file
+in application.properties set eureka.client.enabled=true , for enabling autodiscovery of services

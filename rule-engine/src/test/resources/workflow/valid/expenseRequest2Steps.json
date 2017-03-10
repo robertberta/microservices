@@ -8,7 +8,7 @@
     {
       "stage": 1,
       "step": 2,
-      "queryName": "amount below"
+      "queryName": "amount above"
     },
     {
       "stage": 2,
@@ -16,6 +16,6 @@
       "userId": 1003
     }
   ],
-  "applicationName": "Visma.net Cost Request 1.0",
+  "applicationName": "Visma.net Expense 1.0",
   "active": false
 }
