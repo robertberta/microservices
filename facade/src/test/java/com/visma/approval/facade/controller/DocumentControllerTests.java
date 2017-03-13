@@ -86,10 +86,9 @@ public class DocumentControllerTests {
         String strProcess = gson.toJson(process);
 
         //when
-        List<String> xmls = TestUtils.resourceFolderFileContents("document/valid");
         when(ruleEngine.postForObject(anyString(),anyLong(),any()))
                 .thenReturn(strProcess);
-
+        List<String> xmls = TestUtils.resourceFolderFileContents("document/valid");
         for (String xml : xmls) {
             this.mockMvc.perform(post("/document").content(xml)).andDo(print()).andExpect(status().isOk());
         }

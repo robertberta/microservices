@@ -69,7 +69,13 @@ public class WorkflowStepQueryStore {
             String query = queries.get(queryName);
             query = replaceDocumentFields(query,document);
             try {
-                result = jdbcTemplate.query(query,(rs, rowNum)->rs.getLong(1)).get(0);
+                List<Long> results = jdbcTemplate.query(query,(rs, rowNum)->rs.getLong(1));
+                if (!results.isEmpty()){
+                    result = results.get(0);
+                }
+                else {
+                    log.warn("Query " + query + " did not match any user");
+                }
 
             }catch (InvalidResultSetAccessException ex){
                 log.warn("Sql query " + queryName + " for " + applicationName + "not found or failed");

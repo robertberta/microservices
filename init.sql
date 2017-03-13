@@ -6,4 +6,5 @@ CREATE TABLE `approvaldb`.`amountlimit` (
   `idUser` BIGINT(20) NOT NULL,
   PRIMARY KEY (`id`));
 INSERT INTO `approvaldb`.`amountlimit` (`id`, `idCompany`, `currency`, `amount`, `idUser`) VALUES ('1', '10001', 'EUR', '5000', '1001');
+INSERT INTO `approvaldb`.`amountlimit` (`id`, `idCompany`, `currency`, `amount`, `idUser`) VALUES ('1', '10001', 'USD', '2000', '1003');
 
